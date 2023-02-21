@@ -765,6 +765,30 @@ router.get('/nsfw/cuckold', async (req, res, next) => {
   res.json(loghandler.apikey)
 }
 })
+router.get('/nsfw/cum', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/ArifzynXD/data-arifzyn-api.my.id/master/nsfw/cum.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
 
 // islamic
 router.get('/islam/tahlil', async (req, res, next) => {
